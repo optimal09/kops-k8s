@@ -30,6 +30,7 @@
  ```
  ##  2a) install AWSCLI
   ```sh
+  sudo apt update -y
   sudo apt install awscli -y
   #or
  sudo apt update -y
