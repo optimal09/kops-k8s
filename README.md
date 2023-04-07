@@ -44,7 +44,7 @@
 
  	#Install wget if not installed
  	sudo apt install wget -y
- 	sudo wget https://github.com/kubernetes/kops/releases/download/v1.22.0/kops-linux-amd64
+ 	sudo wget https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
  	sudo chmod +x kops-linux-amd64
  	sudo mv kops-linux-amd64 /usr/local/bin/kops
  
@@ -94,7 +94,7 @@ You Created. --> Save.
 
 # 8) Create kubernetes cluster definitions on S3 bucket
 
-	kops create cluster --zones us-east-2c --networking weave --master-size t2.medium --master-count 1 --node-size t2.medium --node-count=2 ${NAME}
+	 kops create cluster --name=optimalgtech.co.uk --state=s3://optimalgtech.co.uk --zones=eu-west-2a,eu-west-2b --node-count=2 --node-size=t2.medium --master-count=1 --master-size=t2.medium --networking=cilium --yes
 	
 	kops create secret --name ${NAME} sshpublickey admin -i ~/.ssh/id_rsa.pub
 
